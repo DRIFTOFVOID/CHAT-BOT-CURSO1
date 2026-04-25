@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Chatbot TI</title>
+</head>
+<body>
+
+ <h1>Chatbot Carreira em TI</h1>
+
+ <input id="pergunta" placeholder="Digite sua pergunta">
+ <button onclick="enviar()">Enviar</button>
+
+ <p id="resposta"></p>
+
+ <script>
+   async function enviar() {
+     const pergunta = document.getElementById("pergunta").value;
+
+     const response = await fetch("/api/chat", {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json"
+       },
+       body: JSON.stringify({ pergunta })
+     });
+
+     const data = await response.json();
+     document.getElementById("resposta").innerText = data.resposta;
+   }
+ </script>
+
+</body>
+</html>
